@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36401.2 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoNameLudovik.Calculator", "NoNameLudovik.Calculator\NoNameLudovik.Calculator.csproj", "{853198D5-2BC6-4A9C-82F4-24EBF3639E9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorLibrary", "CalculatorLibrary\CalculatorLibrary.csproj", "{3031D3A0-29EF-47E1-9D94-AFB72D4F8B90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{853198D5-2BC6-4A9C-82F4-24EBF3639E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{853198D5-2BC6-4A9C-82F4-24EBF3639E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{853198D5-2BC6-4A9C-82F4-24EBF3639E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3031D3A0-29EF-47E1-9D94-AFB72D4F8B90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3031D3A0-29EF-47E1-9D94-AFB72D4F8B90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3031D3A0-29EF-47E1-9D94-AFB72D4F8B90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3031D3A0-29EF-47E1-9D94-AFB72D4F8B90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
