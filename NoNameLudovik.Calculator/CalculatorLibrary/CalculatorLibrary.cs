@@ -96,6 +96,24 @@ namespace CalculatorLibrary
             Console.Clear();
         }
 
+        public double AskNumber()
+        {
+            // Use Nullable types (with ?) to match type of System.Console.ReadLine
+            string? numInput = "";
+            // Ask the user to type the first number.
+            Console.Write("Type a number, and then press Enter: ");
+            numInput = Console.ReadLine();
+
+            double cleanNum = 0;
+            while (!double.TryParse(numInput, out cleanNum))
+            {
+                Console.Write("This is not valid input. Please enter a numeric value: ");
+                numInput = Console.ReadLine();
+            }
+
+            return cleanNum;
+        }
+
         public void Finish()
         {
             writer.WriteEndArray();
