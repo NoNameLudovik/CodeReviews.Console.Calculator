@@ -6,7 +6,7 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
-        List<Calculation> calculations = new List<Calculation>(); //List for history of calculations
+        List<Calculation> history = new List<Calculation>(); //List for history of calculations
 
         public Calculator()
         {
@@ -63,7 +63,7 @@ namespace CalculatorLibrary
             writer.WriteValue(result);
             writer.WriteEndObject();
 
-            calculations.Add(new Calculation(num1, num2, op, result));//Add operation to history
+            history.Add(new Calculation(num1, num2, op, result));//Add operation to history
 
             return result;
         }
@@ -73,7 +73,7 @@ namespace CalculatorLibrary
         {
             Console.Clear();
             //Check if list is empty. If not than show to user all objects from calculations List
-            if (calculations.Count == 0)
+            if (history.Count == 0)
             {
                 Console.WriteLine("History is empty!)");
                 Console.ReadLine();
@@ -81,7 +81,7 @@ namespace CalculatorLibrary
             else
             {
                 int index = 1;
-                foreach (Calculation calculation in calculations)
+                foreach (Calculation calculation in history)
                 {
                     Console.WriteLine($"{index}. Numbers:{calculation.num1}, {calculation.num2}|{calculation.op}|Result: {calculation.result}");
                     index++;
@@ -90,7 +90,7 @@ namespace CalculatorLibrary
                 Console.WriteLine("Type 'd' if you want to delete history or just press enter if you want to leave");
                 if(Console.ReadLine() == "d")
                 {
-                    calculations.Clear();
+                    history.Clear();
                 }
             }
             Console.Clear();
@@ -101,17 +101,55 @@ namespace CalculatorLibrary
             // Use Nullable types (with ?) to match type of System.Console.ReadLine
             string? numInput = "";
             // Ask the user to type the first number.
-            Console.Write("Type a number, and then press Enter: ");
+            Console.Write("Type a number or type 'h' if you want to choose result from history, and then press Enter: ");
             numInput = Console.ReadLine();
 
             double cleanNum = 0;
             while (!double.TryParse(numInput, out cleanNum))
             {
-                Console.Write("This is not valid input. Please enter a numeric value: ");
-                numInput = Console.ReadLine();
+                if (numInput == "h" && history.Count() > 0)
+                {
+
+                    cleanNum = ChooseResultFromHistory();
+                    break;
+                }
+                else if (numInput == "h" && history.Count() <= 0)
+                {
+                    Console.WriteLine("History is empty!) Type numeric value: ");
+                    numInput = Console.ReadLine();
+                }
+                else
+                {
+                    Console.Write("This is not valid input. Please enter a numeric value: ");
+                    numInput = Console.ReadLine();
+                }
             }
 
             return cleanNum;
+        }
+
+        double ChooseResultFromHistory()
+        {
+            string? indexInput = " ";
+            
+            int index = 1;
+            foreach (Calculation calculation in history)
+            {
+                Console.WriteLine($"{index}. Numbers:{calculation.num1}, {calculation.num2}|{calculation.op}|Result: {calculation.result}");
+                index++;
+            }
+
+            Console.WriteLine("Type index of operation to choose result of it:");
+            indexInput = Console.ReadLine();
+
+            while (!Int32.TryParse(indexInput, out index))
+            {
+                Console.Write("This is not valid input. Please enter a numeric value: ");
+                indexInput = Console.ReadLine();
+            }
+
+            index--;
+            return history[index].result;
         }
 
         public void Finish()
