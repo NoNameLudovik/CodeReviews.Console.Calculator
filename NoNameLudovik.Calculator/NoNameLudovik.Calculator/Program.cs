@@ -14,8 +14,6 @@ class Program
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\n");
             // Declare variables and set to empty.
-            
-            string? numInput2 = "";
             double result = 0;
             string? op;
 

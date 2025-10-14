@@ -6,7 +6,7 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
-        List<Calculation> history = new List<Calculation>(); //List for history of calculations
+        List<Operation> history = new List<Operation>(); //List for history of calculations
 
         public Calculator()
         {
@@ -63,7 +63,7 @@ namespace CalculatorLibrary
             writer.WriteValue(result);
             writer.WriteEndObject();
 
-            history.Add(new Calculation(num1, num2, op, result));//Add operation to history
+            history.Add(new Operation(num1, num2, op, result));//Add operation to history
 
             return result;
         }
@@ -81,9 +81,9 @@ namespace CalculatorLibrary
             else
             {
                 int index = 1;
-                foreach (Calculation calculation in history)
+                foreach (Operation operation in history)
                 {
-                    Console.WriteLine($"{index}. Numbers:{calculation.num1}, {calculation.num2}|{calculation.op}|Result: {calculation.result}");
+                    Console.WriteLine($"{index}. Numbers:{{0:0.##}}, {{1:0.##}}|{operation.op}|Result: {{2:0.##}}", operation.num1, operation.num2, operation.result);
                     index++;
                 }
 
@@ -105,7 +105,7 @@ namespace CalculatorLibrary
             numInput = Console.ReadLine();
 
             double cleanNum = 0;
-            while (!double.TryParse(numInput, out cleanNum))
+            while (!double.TryParse(numInput, out cleanNum))//Checking input
             {
                 if (numInput == "h" && history.Count() > 0)
                 {
@@ -113,7 +113,7 @@ namespace CalculatorLibrary
                     cleanNum = ChooseResultFromHistory();
                     break;
                 }
-                else if (numInput == "h" && history.Count() <= 0)
+                else if (numInput == "h" && history.Count() <= 0)//Checking if history is empty
                 {
                     Console.WriteLine("History is empty!) Type numeric value: ");
                     numInput = Console.ReadLine();
@@ -128,28 +128,29 @@ namespace CalculatorLibrary
             return cleanNum;
         }
 
+        //Method for choosing result of operation from history
         double ChooseResultFromHistory()
         {
             string? indexInput = " ";
             
             int index = 1;
-            foreach (Calculation calculation in history)
+            foreach (Operation operation in history) //Showing list operation
             {
-                Console.WriteLine($"{index}. Numbers:{calculation.num1}, {calculation.num2}|{calculation.op}|Result: {calculation.result}");
+                Console.WriteLine($"{index}. Numbers:{{0:0.##}}, {{1:0.##}}|{operation.op}|Result: {{2:0.##}}", operation.num1, operation.num2, operation.result);
                 index++;
             }
 
             Console.WriteLine("Type index of operation to choose result of it:");
             indexInput = Console.ReadLine();
 
-            while (!Int32.TryParse(indexInput, out index))
+            while (!Int32.TryParse(indexInput, out index) || index > history.Count()) //Checking for correct index input
             {
-                Console.Write("This is not valid input. Please enter a numeric value: ");
+                Console.Write("This is not valid input. Please enter a numeric value or existing index: ");
                 indexInput = Console.ReadLine();
             }
 
-            index--;
-            return history[index].result;
+            //Return result of operation in needed index
+            return history[--index].result;
         }
 
         public void Finish()
@@ -161,14 +162,14 @@ namespace CalculatorLibrary
     }
 
     //Class for determine calculation objects in history
-    public class Calculation
+    public class Operation
     {
         public double num1;
         public double num2;
         public string op;
         public double result;
 
-        public Calculation(double num1, double num2, string op, double result)
+        public Operation(double num1, double num2, string op, double result)
         {
             this.num1 = num1;
             this.num2 = num2;
