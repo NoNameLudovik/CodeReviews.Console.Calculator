@@ -23,7 +23,12 @@ class Program
             Console.WriteLine("\ts - Subtract");
             Console.WriteLine("\tm - Multiply");
             Console.WriteLine("\td - Divide");
-            Console.WriteLine("\th - Show History of Calculation");
+            Console.WriteLine("\tp - Power");
+            Console.WriteLine("\tsq - Square Root");
+            Console.WriteLine("\tsin - Sinus");
+            Console.WriteLine("\tcos - Cosinus");
+            Console.WriteLine("\ttan - Tangent");
+            Console.WriteLine("\th - Show History of Operation");
             Console.Write("Your option? ");
 
             // Validate input is not null, and matches the pattern
@@ -31,7 +36,7 @@ class Program
             {
                 op = Console.ReadLine();
 
-                if (op == null || !Regex.IsMatch(op, "[a|s|m|d|h]"))
+                if (op == null || !Regex.IsMatch(op, "[a|s|m|d|h|p|sin|cos|tan|cot]"))
                 {
                     Console.Write("Error: Unrecognized input. Try again:");
                     continue;
@@ -44,11 +49,25 @@ class Program
                 calculator.ShowHistory();
                 continue;
             }
-            Console.Clear();
-            Console.WriteLine("First Number:");
-            double firstNumber = calculator.AskNumber();
-            Console.WriteLine("Second Number:");
-            double secondNumber = calculator.AskNumber();
+
+            double firstNumber;
+            double secondNumber;
+
+            if (!Regex.IsMatch(op, "[sin|cos|tan]")) 
+            {
+                Console.Clear();
+                Console.WriteLine("First Number");
+                firstNumber = calculator.AskNumber();
+                Console.WriteLine("Second Number");
+                secondNumber = calculator.AskNumber();
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Your Number");
+                firstNumber = calculator.AskNumber();
+                secondNumber = 0;
+            }
 
             try
             {

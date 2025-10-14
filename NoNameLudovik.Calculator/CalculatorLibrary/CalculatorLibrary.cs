@@ -55,7 +55,31 @@ namespace CalculatorLibrary
                     writer.WriteValue("Divide");
                     op = "Divide";
                     break;
-                // Return text for an incorrect option entry.
+                case "p":
+                    result = Math.Pow(num1, num2);
+                    writer.WriteValue("Power");
+                    op = "Power";
+                    break;
+                case "sq":
+                    result = Math.Sqrt(num1);
+                    writer.WriteValue("Square Root");
+                    op = "Squar Root";
+                    break;
+                case "sin":
+                    result = Math.Sin(num1);
+                    writer.WriteValue("Sinus");
+                    op = "Sinus";
+                    break;
+                case "cos":
+                    result = Math.Cos(num1);
+                    writer.WriteValue("Cosinus");
+                    op = "Cosinus";
+                    break;
+                case "tan":
+                    result = Math.Tan(num1);
+                    writer.WriteValue("Tangent");
+                    op = "Tangent";
+                    break;
                 default:
                     break;
             }
